@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>NotumAi v1.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tool_style.css">
+    <link rel="stylesheet" href="css/alert_style.css">
+</head>
+
+<body>
+
+    <!-- HOME PAGE -->
+    <!-- HOME PAGE -->
+    <div id="home-page">
+        <!-- Sidebar -->
+        <div class="app-sidebar">
+            <div class="app-brand">
+                <span class="material-symbols-outlined" style="font-size:24px; color:var(--primary);">view_in_ar</span>
+                NotumAi
+            </div>
+            <nav class="app-nav">
+                <div class="nav-item active" onclick="showPage('dashboard')">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </div>
+                <div class="nav-item" onclick="showPage('help')">
+                    <span class="material-symbols-outlined">description</span> Help & Docs
+                </div>
+            </nav>
+            <div class="app-version">Version 1.0</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="app-main">
+
+            <!-- DASHBOARD VIEW -->
+            <div id="view-dashboard">
+                <header class="app-header">
+                    <div>
+                        <h1 class="page-title">Dashboard</h1>
+                        <p class="page-subtitle">Manage your computer vision projects</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showNewProjectModal()">
+                        <span class="material-symbols-outlined">add</span> New Project
+                    </button>
+                </header>
+
+                <!-- Stats Row -->
+                <div class="stats-grid">
+                    <div class="dashboard-card">
+                        <div class="card-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">
+                            <span class="material-symbols-outlined">folder</span>
+                        </div>
+                        <div>
+                            <div class="stat-value" id="stat-total-projects">0</div>
+                            <div class="stat-label">Active Projects</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
+                            <span class="material-symbols-outlined">check_circle</span>
+                        </div>
+                        <div>
+                            <div class="stat-value">Ready</div>
+                            <div class="stat-label">System Status</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Projects -->
+                <div class="section-area">
+                    <h2 class="section-title">Recent Projects</h2>
+                    <div id="projectGrid" class="project-grid">
+                        <!-- Projects injected here by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- HELP VIEW -->
+            <div id="view-help" style="display:none;">
+                <header class="app-header">
+                    <div>
+                        <h1 class="page-title">Help & Documentation</h1>
+                        <p class="page-subtitle">Guide to using NotumAi</p>
+                    </div>
+                </header>
+
+                <div style="max-width: 800px;">
+                    <section style="margin-bottom: 40px;">
+                        <h3 style="color:white; margin-bottom:16px;">✨ About NotumAi</h3>
+                        <div
+                            style="background:var(--card-bg); padding:24px; border-radius:12px; border:1px solid var(--border-color); color:var(--text-muted); line-height:1.6;">
+                            <p style="margin-top:0;"><strong>NotumAi</strong> is a professional-grade image
+                                annotation tool designed for computer vision workflows. It leverages the power of AI to
+                                accelerate the labeling process.</p>
+                            <p>Key features include:</p>
+                            <ul style="padding-left:20px; margin-bottom:0;">
+                                <li><strong>AI-Assisted Segmentation:</strong> Powered by SAM 2.1 (Segment Anything
+                                    Model) for instant object masking.</li>
+                                <li><strong>Multi-Format Export:</strong> Support for industry standards like COCO JSON,
+                                    Pascal VOC XML, YOLO TXT, and Segmentation Masks.</li>
+                                <li><strong>Project Management:</strong> Organize your datasets into projects with
+                                    independent class categories and settings.</li>
+                                <li><strong>Efficient UI:</strong> Keyboard-driven workflow, dark mode interface, and
+                                    responsive canvas interactions.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 40px;">
+                        <h3 style="color:white; margin-bottom:16px;">🚀 Quick Start</h3>
+                        <div
+                            style="background:var(--card-bg); padding:24px; border-radius:12px; border:1px solid var(--border-color); color:var(--text-muted); line-height:1.6;">
+                            <p><strong>1. Create a Project:</strong> Click "+ New Project", give it a name, and select a
+                                folder containing images.</p>
+                            <p><strong>2. Annotate:</strong> Use the tools on the left sidebar. SAM (Magic Wand) is
+                                selected by default.</p>
+                            <p><strong>3. Save:</strong> Press <code>Enter</code> or click "Save" to confirm
+                                annotations.</p>
+                            <p><strong>4. Export:</strong> Go to the "Export" page from within a project to download
+                                your dataset.</p>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 40px;">
+                        <h3 style="color:white; margin-bottom:16px;">⌨️ Keyboard Shortcuts</h3>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                            <div class="shortcut-card"
+                                style="background:var(--card-bg); padding:16px; border-radius:8px; border:1px solid var(--border-color);">
+                                <div style="color:white; font-weight:600; margin-bottom:4px;">Save Annotation</div>
+                                <div class="shortcut-key">ENTER</div>
+                            </div>
+                            <div class="shortcut-card"
+                                style="background:var(--card-bg); padding:16px; border-radius:8px; border:1px solid var(--border-color);">
+                                <div style="color:white; font-weight:600; margin-bottom:4px;">Cancel / Clear</div>
+                                <div class="shortcut-key">ESC</div>
+                            </div>
+                            <div class="shortcut-card"
+                                style="background:var(--card-bg); padding:16px; border-radius:8px; border:1px solid var(--border-color);">
+                                <div style="color:white; font-weight:600; margin-bottom:4px;">Next Image</div>
+                                <div class="shortcut-key">Right Arrow</div>
+                            </div>
+                            <div class="shortcut-card"
+                                style="background:var(--card-bg); padding:16px; border-radius:8px; border:1px solid var(--border-color);">
+                                <div style="color:white; font-weight:600; margin-bottom:4px;">Previous Image</div>
+                                <div class="shortcut-key">Left Arrow</div>
+                            </div>
+                            <div class="shortcut-card"
+                                style="background:var(--card-bg); padding:16px; border-radius:8px; border:1px solid var(--border-color);">
+                                <div style="color:white; font-weight:600; margin-bottom:4px;">Undo Point</div>
+                                <div class="shortcut-key">Backspace</div>
+                            </div>
+                            <div class="shortcut-card"
+                                style="background:var(--card-bg); padding:16px; border-radius:8px; border:1px solid var(--border-color);">
+                                <div style="color:white; font-weight:600; margin-bottom:4px;">Undo Annotation</div>
+                                <div class="shortcut-key">Ctrl + Z</div>
+                            </div>
+                            <div class="shortcut-card"
+                                style="background:var(--card-bg); padding:16px; border-radius:8px; border:1px solid var(--border-color);">
+                                <div style="color:white; font-weight:600; margin-bottom:4px;">Select Class</div>
+                                <div class="shortcut-key">1 - 9</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3 style="color:white; margin-bottom:16px;">🛠️ Tools Overview</h3>
+                        <div
+                            style="background:var(--card-bg); padding:24px; border-radius:12px; border:1px solid var(--border-color); color:var(--text-muted); line-height:1.6;">
+                            <ul style="padding-left:20px; margin:0;">
+                                <li style="margin-bottom:10px;"><strong>✨ Smart Segment (SAM):</strong> Click points on
+                                    an object to automatically segment it. Add more points to refine.</li>
+                                <li style="margin-bottom:10px;"><strong>⬜ Bounding Box:</strong> Drag to draw a
+                                    rectangle around an object.</li>
+                                <li><strong>📐 Polygon:</strong> Click to place manual vertex points for precise shapes.
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- NEW PROJECT MODAL -->
+    <div id="newProjectModal" class="modal-overlay">
+        <div class="modal">
+            <h2>Create New Project</h2>
+            <div class="form-group">
+                <label>Project Name</label>
+                <input type="text" id="newProjName" class="form-input" placeholder="e.g. Traffic Sign Dataset">
+            </div>
+            <div class="form-group">
+                <label>Image Folder</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" id="newProjPath" class="form-input" placeholder="Paste path or browse...">
+                    <button class="btn btn-secondary" onclick="pickProjectFolder()">Browse</button>
+                </div>
+            </div>
+            <div style="display:flex; justify-content: flex-end; gap:10px; margin-top:20px;">
+                <button class="btn btn-danger" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="createNewProject()">Create Project</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WORKSPACE (Initially Hidden) -->
+    <div id="workspace" style="display:none; width:100%; height:100%; display:flex;">
+
+        <div id="sidebar">
+            <div class="sidebar-header">
+                <div class="project-title">
+                    <span id="workspaceTitle">PROJECT DATA</span>
+                    <div style="display:flex; gap:6px;">
+                        <button class="btn btn-secondary" style="font-size: 10px; padding: 2px 6px;"
+                            onclick="openExportPage()">EXPORT</button>
+                        <button class="btn btn-secondary" style="font-size: 10px; padding: 2px 6px;"
+                            onclick="location.reload()">HOME</button>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <div
+                        style="display:flex; justify-content: space-between; font-size: 10px; margin-top: 4px; color: #888;">
+                        <span id="progressText">0 / 0 (0%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-panel">
+                <div style="font-size: 10px; color: #888; margin-bottom: 8px; font-weight: 600;">CLASS CATEGORIES</div>
+                <div id="classList"></div>
+
+                <div style="display: flex; gap: 5px; margin-top: 10px;">
+                    <input type="text" id="newClassName" placeholder="New class..."
+                        style="flex: 1; background: #1a1a1a; border: 1px solid #444; color: white; padding: 6px; border-radius: 4px; font-size: 12px;">
+                    <button class="btn btn-primary" style="padding: 2px 10px;" onclick="addNewCategory()">+</button>
+                </div>
+
+                <div style="margin-top: 15px; border-top: 1px solid #3e3e3e; padding-top: 10px;">
+                    <label
+                        style="font-size: 12px; display: flex; align-items: center; gap: 8px; cursor: pointer; color: #ccc;">
+                        <input type="checkbox" id="autoNext"> Auto-Next after Save
+                    </label>
+                </div>
+            </div>
+
+
+
+            <div style="padding: 10px; display: flex; gap: 5px; border-bottom: 1px solid var(--border-color);">
+                <button class="btn btn-primary" style="flex:1" onclick="pickFolder()">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">folder_open</span> Open Images
+                </button>
+            </div>
+
+            <div id="fileList" class="file-list"></div>
+        </div>
+
+        <div id="main">
+            <div id="toolbar">
+                <button class="btn btn-primary" onclick="saveCurrentMask()">
+                    <span class="material-symbols-outlined" style="font-size:18px">save</span> Save
+                </button>
+                <button class="btn btn-secondary" onclick="clearCurrent()">
+                    <span class="material-symbols-outlined" style="font-size:18px">close</span> Cancel
+                </button>
+
+                <div class="toolbar-title" id="currentFileName">No image selected</div>
+
+                <button class="btn btn-secondary" onclick="prevImage()">Previous</button>
+                <button class="btn btn-secondary" onclick="nextImage()">Next</button>
+            </div>
+
+            <div style="flex: 1; display: flex; position: relative;">
+                <!-- TOOLS SIDEBAR -->
+                <div id="tools-sidebar"
+                    style="width: 56px; background: var(--surface-container); border-right: 1px solid var(--outline-variant); display: flex; flex-direction: column; align-items: center; padding: 12px 0; gap: 8px; z-index: 10;">
+                    <button id="tool-sam" class="tool-btn active" title="Smart Segment (SAM)" onclick="setTool('sam')">
+                        <span class="material-symbols-outlined">auto_awesome</span>
+                    </button>
+                    <button id="tool-bbox" class="tool-btn" title="Bounding Box" onclick="setTool('bbox')">
+                        <span class="material-symbols-outlined">crop_square</span>
+                    </button>
+                    <button id="tool-polygon" class="tool-btn" title="Polygon" onclick="setTool('polygon')">
+                        <span class="material-symbols-outlined">pentagon</span>
+                    </button>
+                </div>
+
+                <div id="canvas-container" style="flex:1;">
+                    <div id="loading-overlay">
+                        <span>Processing...</span>
+                    </div>
+                    <canvas id="canvas"></canvas>
+                </div>
+
+                <!-- RIGHT SIDEBAR -->
+                <div id="layer-panel">
+                    <div style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding: 16px 16px 0 16px;">
+                            <div
+                                style="font-size: 11px; color: #9ca3af; letter-spacing: 1px; font-weight: 700; text-transform: uppercase;">
+                                Annotations
+                            </div>
+                        </div>
+                        <div id="layerList"></div>
+                    </div>
+
+                    <!-- INFO PANEL -->
+                    <div id="info-panel"
+                        style="padding: 16px; border-top: 1px solid var(--md-sys-color-outline-variant); background: var(--surface-2);">
+                        <div
+                            style="font-size: 11px; color: #9ca3af; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">
+                            Details
+                        </div>
+
+                        <div
+                            style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12px; color: var(--md-sys-color-on-surface-variant);">
+                            <div>
+                                <div style="color: var(--md-sys-color-on-surface); font-weight: 500;">Image Size</div>
+                                <div id="info-dims">- x -</div>
+                            </div>
+                            <div>
+                                <div style="color: var(--md-sys-color-on-surface); font-weight: 500;">Objects</div>
+                                <div id="info-count">0</div>
+                            </div>
+                            <div>
+                                <div style="color: var(--md-sys-color-on-surface); font-weight: 500;">Active SAM
+                                    Prediction</div>
+                                <div id="info-score" style="color: var(--md-sys-color-primary); font-weight: 600;">-
+                                </div>
+                            </div>
+                            <div>
+                                <div style="color: var(--md-sys-color-on-surface); font-weight: 500;">Cursor</div>
+                                <div id="info-cursor">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div> <!-- End Workspace -->
+
+    <!-- EXPORT PAGE -->
+    <!-- EXPORT PAGE (REDESIGNED) -->
+    <div id="export-page" style="display:none;">
+        <div class="export-container">
+            <header class="export-header">
+                <div>
+                    <h1 class="export-title">Export Dataset</h1>
+                    <p class="export-subtitle">Convert your project annotations into standard industry formats ready for
+                        machine learning pipelines.</p>
+                </div>
+                <button class="btn btn-secondary" onclick="closeExportPage()">
+                    <span class="material-symbols-outlined">arrow_back</span> Back to Workspace
+                </button>
+            </header>
+
+            <!-- Stats Overview -->
+            <div class="export-stats">
+                <div class="stat-card">
+                    <div class="card-icon">
+                        <span class="material-symbols-outlined">image</span>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="expTotalImages">0</div>
+                        <div class="stat-label">Total Images</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="card-icon">
+                        <span class="material-symbols-outlined">check_circle</span>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="expAnnotated" style="color:var(--md-sys-color-primary);">0</div>
+                        <div class="stat-label">Annotated</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="card-icon">
+                        <span class="material-symbols-outlined">category</span>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="expClasses" style="color:var(--success);">0</div>
+                        <div class="stat-label">Classes</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Options -->
+            <h3
+                style="font-size:24px; font-weight:400; font-family:'Outfit'; margin-bottom:24px; color:var(--md-sys-color-on-surface);">
+                Available Formats</h3>
+
+            <div class="format-grid">
+                <!-- COCO -->
+                <div class="export-card">
+                    <div class="exp-icon-large">JSON</div>
+                    <div class="exp-content">
+                        <div class="exp-title">COCO Format</div>
+                        <div class="exp-desc">Complete dataset in a single JSON file. Standard for object detection
+                            (R-CNN, DETR) and segmentation.</div>
+                    </div>
+                    <div class="exp-actions">
+                        <button class="btn btn-primary" onclick="triggerExport('coco')">
+                            <span class="material-symbols-outlined">download</span> Export JSON
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pascal VOC -->
+                <div class="export-card">
+                    <div class="exp-icon-large">XML</div>
+                    <div class="exp-content">
+                        <div class="exp-title">Pascal VOC</div>
+                        <div class="exp-desc">Individual XML files per image containing bounding boxes. Compatible with
+                            ImageNet and legacy tools.</div>
+                    </div>
+                    <div class="exp-actions">
+                        <button class="btn btn-primary" onclick="triggerExport('voc')">
+                            <span class="material-symbols-outlined">download</span> Export XML
+                        </button>
+                    </div>
+                </div>
+
+                <!-- YOLO -->
+                <div class="export-card">
+                    <div class="exp-icon-large">TXT</div>
+                    <div class="exp-content">
+                        <div class="exp-title">YOLO Format</div>
+                        <div class="exp-desc">Normalized coordinates in text files. Optimized for YOLOv5, v8, and
+                            real-time detection models.</div>
+                    </div>
+                    <div class="exp-actions">
+                        <button class="btn btn-primary" onclick="triggerExport('yolo')">
+                            <span class="material-symbols-outlined">download</span> Export YOLO
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Masks -->
+                <div class="export-card">
+                    <div class="exp-icon-large">PNG</div>
+                    <div class="exp-content">
+                        <div class="exp-title">Segmentation Masks</div>
+                        <div class="exp-desc">Pixel-perfect binary or semantic masks. Best for UNet, DeepLab, and
+                            semantic segmentation tasks.</div>
+                    </div>
+                    <div class="exp-actions">
+                        <button class="btn btn-primary" onclick="triggerExport('masks')">
+                            <span class="material-symbols-outlined">download</span> Generate Masks
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast-premium">Action Completed</div>
+
+    <!-- CUSTOM ALERT MODAL -->
+    <div id="customModalOverlay" class="custom-modal-overlay">
+        <div class="custom-modal">
+            <div class="modal-header">
+                <div id="customModalIcon" class="modal-icon info">
+                    <span class="material-symbols-outlined">info</span>
+                </div>
+                <h3 id="customModalTitle" class="modal-title">Alert</h3>
+            </div>
+            <div id="customModalBody" class="modal-body">
+                Message goes here...
+            </div>
+            <div class="modal-actions" id="customModalActions">
+                <button class="modal-btn modal-btn-cancel" onclick="closeCustomModal()">Cancel</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmCustomModal()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="folderPicker" webkitdirectory multiple hidden>
+
+    <!-- Load Modules -->
+    <script type="module" src="js/main.js"></script>
+
+</body>
+
+</html>
