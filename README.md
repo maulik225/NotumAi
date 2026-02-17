@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="ElectronFrontend/assets/logo.svg" alt="NotumAi Logo" width="600">
+  <img src="docs/assets/logo.svg" alt="NotumAi Logo" width="600">
 </div>
 
 # NotumAi - Professional AI Annotation Tool
