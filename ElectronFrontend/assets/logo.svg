@@ -1,0 +1,40 @@
+<svg width="720" height="220" viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Purple Gradient -->
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6D28D9"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+
+    <style>
+      .text-main { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- Icon: Gradient Bounding Box -->
+  <rect x="40" y="50" width="120" height="120"
+        fill="none"
+        stroke="url(#aiGradient)"
+        stroke-width="6"
+        rx="14"/>
+
+  <!-- Neural Connections -->
+  <line x1="80" y1="90" x2="125" y2="110" stroke="url(#aiGradient)" stroke-width="3"/>
+  <line x1="125" y1="110" x2="100" y2="145" stroke="url(#aiGradient)" stroke-width="3"/>
+  <line x1="80" y1="90" x2="100" y2="145" stroke="url(#aiGradient)" stroke-width="3"/>
+
+  <!-- Neural Nodes -->
+  <circle cx="80" cy="90" r="6" fill="url(#aiGradient)"/>
+  <circle cx="125" cy="110" r="6" fill="url(#aiGradient)"/>
+  <circle cx="100" cy="145" r="6" fill="url(#aiGradient)"/>
+
+  <!-- Accent Open Corner -->
+  <line x1="135" y1="50" x2="165" y2="50" stroke="url(#aiGradient)" stroke-width="6"/>
+  <line x1="165" y1="50" x2="165" y2="80" stroke="url(#aiGradient)" stroke-width="6"/>
+
+  <!-- Wordmark -->
+  <text x="210" y="135" font-size="64" class="text-main" fill="#FFFFFF">
+    Notum<tspan fill="url(#aiGradient)">AI</tspan>
+  </text>
+</svg>

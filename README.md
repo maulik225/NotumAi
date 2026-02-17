@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="ElectronFrontend/assets/logo.svg" alt="NotumAi Logo" width="600">
+</div>
+
 # NotumAi - Professional AI Annotation Tool
 
 **NotumAi** is a professional-grade image annotation tool designed to streamline the creation of high-quality computer vision datasets. Built with a modern **Electron** frontend and a powerful **Python (FastAPI)** backend, it integrates the state-of-the-art **Segment Anything Model 2 (SAM 2)** to provide AI-assisted annotation capabilities.
